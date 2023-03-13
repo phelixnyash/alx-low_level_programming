@@ -38,4 +38,4 @@ char *str_concat(char *s1, char *s2)
 		count++;
 	}
 	return (strnew);
-}i
+}
