@@ -3,16 +3,35 @@
  */
 
 #include "main.h"
-
 /**
- * print_binary - Prints the binary representation of a number.
- * @n: The number to be printed in binary.
+ * create_file - Creates a file.
+ * @filename: A pointer to the name of the file to create.
+ * @text_content: A pointer to a string to write to the file.
+ *
+ * Return: If the function fails - -1.
+ *         Otherwise - 1.
  */
-void print_binary(unsigned long int n)
+int create_file(const char *filename, char *text_content)
 {
-	if (n > 1)
-		print_binary(n >> 1);
+	int o, w, len = 0;
 
-	_putchar((n & 1) + '0');
+	if (filename == NULL)
+		return (-1);
+
+	if (text_content != NULL)
+	{
+		for (len = 0; text_content[len];)
+			len++;
+	}
+
+	o = open(filename, O_CREAT | O_RDWR | O_TRUNC, 0600);
+	w = write(o, text_content, len);
+
+	if (o == -1 || w == -1)
+		return (-1);
+
+	close(o);
+
+	return (1);
 }
 
